@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class ShapeService {
 
+    //TODO - add validation \ Data sanitation
     @Autowired
     private ShapeDB dao;
 

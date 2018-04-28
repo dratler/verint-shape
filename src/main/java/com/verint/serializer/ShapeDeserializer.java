@@ -24,6 +24,7 @@ import java.util.Objects;
 
 @JsonComponent
 public class ShapeDeserializer extends JsonDeserializer<Shape> {
+    //TODO - there is a need to improve error handling \ interceptor
     @Override
     public Shape deserialize(JsonParser jsonParser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
         TreeNode treeNode = jsonParser.getCodec().readTree(jsonParser);

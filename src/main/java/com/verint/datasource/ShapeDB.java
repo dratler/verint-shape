@@ -1,6 +1,5 @@
 package com.verint.datasource;
 
-import com.verint.exception.SpringException;
 import com.verint.mock.DataSource;
 import com.verint.model.Shape;
 import org.springframework.beans.factory.annotation.Autowired;

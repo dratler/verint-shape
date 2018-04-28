@@ -15,6 +15,7 @@ import java.io.IOException;
  * This class Serialize the Interface to supported JSON
  */
 public class ShapeSerializer extends JsonSerializer<Shape> {
+    //TODO - there is a need to improve error handling \ interceptor
 
     @Override
     public void serialize(Shape shape, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {

@@ -9,6 +9,9 @@ import com.verint.types.SupportedShapes;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
+/**
+ * The following class is the main POJO object it has ShapeSerializer/ShapeDeserializer
+ */
 @JsonSerialize(using = ShapeSerializer.class)
 @JsonDeserialize(using = ShapeDeserializer.class)
 public abstract class Shape {
