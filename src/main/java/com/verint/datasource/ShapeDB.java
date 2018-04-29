@@ -5,12 +5,14 @@ import com.verint.model.Shape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
 
 @Component
 @Primary
+@Transactional
 public class ShapeDB {
 
     @Autowired
