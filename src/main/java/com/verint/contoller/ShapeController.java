@@ -40,8 +40,7 @@ public class ShapeController {
     @RequestMapping( method = RequestMethod.POST , consumes = {"application/json"})
     @ExceptionHandler({SpringException.class})
     public @ResponseBody Shape insert(@RequestBody Shape shape){
-        Shape s = shapeService.store(shape);
-        return s;
+        return shapeService.store(shape);
     }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.PUT , consumes = {"application/json"})

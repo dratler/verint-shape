@@ -10,6 +10,7 @@ import com.verint.model.Shape;
 import com.verint.types.SupportedShapes;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * This class Serialize the Interface to supported JSON
@@ -21,7 +22,9 @@ public class ShapeSerializer extends JsonSerializer<Shape> {
     public void serialize(Shape shape, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();
         SupportedShapes type = shape.getShapeType();
-        jsonGenerator.writeNumberField("id",shape.getId());
+        if(Objects.nonNull(shape.getId())) {
+            jsonGenerator.writeNumberField("id", shape.getId());
+        }
         jsonGenerator.writeStringField("type",type.name());
         jsonGenerator.writeNumberField("area",shape.calcArea());
         if(SupportedShapes.CIRCLE == type){

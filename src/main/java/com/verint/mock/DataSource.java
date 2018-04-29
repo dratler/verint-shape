@@ -74,7 +74,7 @@ public class DataSource {
     public void update(Shape target){
         Integer id = target.getId();
         Shape source = select(id);
-        BeanUtils.copyProperties(source,target);
+        BeanUtils.copyProperties(target,source);
         storedShapes.put(id,source);
     }
 
