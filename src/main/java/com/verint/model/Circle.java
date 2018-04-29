@@ -1,14 +1,9 @@
 package com.verint.model;
 
-import com.verint.exception.SpringException;
+import com.verint.exception.MissingArgException;
 import com.verint.types.SupportedShapes;
 import org.hibernate.validator.constraints.Range;
-import org.junit.Before;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -36,7 +31,7 @@ public class Circle extends Shape {
     @Override
     public double calcArea() {
         if(Objects.isNull(radius)){
-            throw new SpringException("Missing radius on circle shape");
+            throw new MissingArgException("Missing radius on circle shape");
         }
         return (BigDecimal
                     .valueOf(radius)

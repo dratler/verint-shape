@@ -1,6 +1,6 @@
 package com.verint.contoller;
 
-import com.verint.exception.SpringException;
+import com.verint.exception.MissingArgException;
 
 import com.verint.model.Shape;
 import com.verint.service.ShapeService;
@@ -25,29 +25,25 @@ public class ShapeController {
     }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
-    @ExceptionHandler({SpringException.class})
     public @ResponseBody Shape getByid(@PathVariable @Range(min = 0) Integer id){
 
         return shapeService.getById(id);
     }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.DELETE)
-    @ExceptionHandler({SpringException.class})
     public Integer delete(@PathVariable @Min(0) Integer id){
         return shapeService.delete(id);
     }
 
     @RequestMapping( method = RequestMethod.POST , consumes = {"application/json"})
-    @ExceptionHandler({SpringException.class})
     public @ResponseBody Shape insert(@RequestBody Shape shape){
         return shapeService.store(shape);
     }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.PUT , consumes = {"application/json"})
-    @ExceptionHandler({SpringException.class})
     public @ResponseBody Shape update(@PathVariable @Min(0) Integer id ,@RequestBody Shape shape){
         if(id != shape.getId()){
-            throw new SpringException("The shape id and parameter id are different");
+            throw new MissingArgException("The shape id and parameter id are different");
         }
         return shapeService.store(shape);
     }

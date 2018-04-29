@@ -1,5 +1,5 @@
 package com.verint.model;
-import com.verint.exception.SpringException;
+import com.verint.exception.MissingArgException;
 import com.verint.types.SupportedShapes;
 
 import javax.validation.constraints.Min;
@@ -44,7 +44,7 @@ public class Rectangle extends Shape {
     @Override
     public double calcArea() {
         if(Objects.isNull(height) || Objects.isNull(length)){
-            throw new SpringException("Rectangle is missing 'height' or 'length'");
+            throw new MissingArgException("Rectangle is missing 'height' or 'length'");
         }
         return (BigDecimal.valueOf(height).multiply(BigDecimal.valueOf(length))).doubleValue();
     }

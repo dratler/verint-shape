@@ -1,18 +1,15 @@
 package com.verint.mock;
 
-import com.verint.exception.SpringException;
+import com.verint.exception.ShapeNotFoundException;
 import com.verint.model.Circle;
 import com.verint.model.Rectangle;
 import com.verint.model.Shape;
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -59,7 +56,7 @@ public class DataSource {
     public Shape select(Integer id){
         Shape shape = storedShapes.get(id);
         if(Objects.isNull(shape)) {
-            throw new SpringException("Requested Shape with id :["+id+"] not found");
+            throw new ShapeNotFoundException("Requested Shape with id :["+id+"] not found");
         }
         return shape;
     }
@@ -82,7 +79,7 @@ public class DataSource {
         select(id);
         storedShapes.remove(id);
         if(Objects.isNull(select(id))){
-            throw new SpringException("Delete shape did not happen");
+            throw new ShapeNotFoundException("Delete Shape failed");
         }
     }
 

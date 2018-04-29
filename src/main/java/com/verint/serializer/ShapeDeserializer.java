@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.node.DoubleNode;
 import com.fasterxml.jackson.databind.node.NumericNode;
 import com.fasterxml.jackson.databind.node.TextNode;
-import com.verint.exception.SpringException;
+import com.verint.exception.InvalidShapeException;
 import com.verint.model.Circle;
 import com.verint.model.Rectangle;
 import com.verint.model.Shape;
@@ -31,18 +31,24 @@ public class ShapeDeserializer extends JsonDeserializer<Shape> {
         TreeNode type = treeNode.get("type");
         Shape s = null;
         if(null == type){
-            throw new SpringException("Shape 'type' is missing");
+            throw new InvalidShapeException("Shape 'type' is missing");
         }
         SupportedShapes shapeType = SupportedShapes.getSupportedShape(((TextNode)type).asText());
         if(SupportedShapes.RECTANGLE == shapeType){
             s = new Rectangle();
             DoubleNode height = (DoubleNode) treeNode.get("height");
             DoubleNode length = (DoubleNode) treeNode.get("length");
+            if(Objects.isNull(height) || Objects.isNull(length)){
+                throw new InvalidShapeException("Rectangle is missing 'height' or 'length'");
+            }
             ((Rectangle)s).withHeight(height.doubleValue());
             ((Rectangle)s).withLength(length.doubleValue());
         } else if(SupportedShapes.CIRCLE == shapeType){
             s = new Circle();
             DoubleNode radius = (DoubleNode) treeNode.get("radius");
+            if(Objects.isNull(radius)){
+                throw new InvalidShapeException("Circle is missing radius");
+            }
             ((Circle)s).withRadius(radius.doubleValue());
         }
         NumericNode id = (NumericNode)treeNode.get("id");

@@ -1,9 +1,13 @@
 package com.verint.exception;
 
-public class SpringException extends RuntimeException{
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class InvalidShapeException extends RuntimeException{
     private String exceptionMsg;
 
-    public SpringException(String exceptionMsg) {
+    public InvalidShapeException(String exceptionMsg) {
         this.exceptionMsg = exceptionMsg;
     }
     public String getExceptionMsg(){
